@@ -1,16 +1,21 @@
 package com.yf.autotask;
 
+import android.app.job.JobInfo;
+import android.app.job.JobScheduler;
 import android.content.ClipData;
 import android.content.ClipboardManager;
 import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Color;
+import android.os.Build;
 import android.os.Handler;
 import android.os.Message;
+import android.support.annotation.RequiresApi;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatDelegate;
+import android.util.Log;
 import android.view.Display;
 import android.view.MenuItem;
 import android.view.View;
@@ -19,6 +24,7 @@ import android.widget.Button;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
+import com.yf.autotask.service.MyJobService;
 import com.yf.autotask.view.RecoderView;
 
 import java.net.URISyntaxException;
@@ -61,6 +67,37 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
         mSwitchModel.setText("日间模式");
         mCopyBtn.setOnClickListener(this);
         mParseBtn.setOnClickListener(this);
+
+        if(Build.VERSION.SDK_INT>=Build.VERSION_CODES.LOLLIPOP){
+            JobScheduler scheduler= (JobScheduler) getSystemService(JOB_SCHEDULER_SERVICE);
+
+
+            JobInfo.Builder builder=new JobInfo.Builder(1,new ComponentName(getPackageName(), MyJobService.class.getName()));
+            //每个三秒执行一次
+            //builder.setPeriodic(3000);
+            //延迟时间
+            //builder.setMinimumLatency(3000);
+            //最晚延迟时间
+            builder.setOverrideDeadline(3000);
+            //系统重启时  是否继续执行
+            builder.setPersisted(true);
+            //默认为NONE
+            builder.setRequiredNetworkType(JobInfo.NETWORK_TYPE_NONE);
+            //是否只有充电时才能执行
+            builder.setRequiresCharging(false);
+            // 是否用户没使用设备并且一段时间未使用时执行
+            builder.setRequiresDeviceIdle(false);
+            if(scheduler.schedule(builder.build())<=0){
+                Log.i("111","error");
+            }else {
+                Log.i("111","run job...");
+            }
+
+        }else {
+            Log.i("111","版本不支持:"+Build.VERSION.SDK_INT);
+        }
+
+
     }
 
     @Override
