@@ -21,6 +21,14 @@
         <receiver android:name=".receiver.MyReceiver">
             <intent-filter>
                 <action android:name="android.intent.action.BATTERY_LOW"></action>
+                <action android:name="android.intent.action.BATTERY_CHANGED"></action>
+                <action android:name="android.intent.action.BATTERY_OKAY"></action>
+                <action android:name="android.intent.action.PACKAGE_ADDED"></action>
+                <action android:name="android.intent.action.PACKAGES_UNSUSPENDED"></action>
+                <action android:name="android.intent.action.SCREEN_OFF"></action>
+                <action android:name="android.intent.action.USER_PRESENT"></action>
+                <action android:name="android.intent.action.USER_UNLOCKED"></action>
+                <action android:name="android.intent.action.SCREEN_ON"></action>
             </intent-filter>
         </receiver>
     </application>
