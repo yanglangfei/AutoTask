@@ -68,10 +68,8 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
         mCopyBtn.setOnClickListener(this);
         mParseBtn.setOnClickListener(this);
 
-        if(Build.VERSION.SDK_INT>=Build.VERSION_CODES.LOLLIPOP){
+       if(Build.VERSION.SDK_INT>=Build.VERSION_CODES.LOLLIPOP){
             JobScheduler scheduler= (JobScheduler) getSystemService(JOB_SCHEDULER_SERVICE);
-
-
             JobInfo.Builder builder=new JobInfo.Builder(1,new ComponentName(getPackageName(), MyJobService.class.getName()));
             //每个三秒执行一次
             //builder.setPeriodic(3000);
