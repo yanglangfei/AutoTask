@@ -43,6 +43,10 @@ public class MyReceiver extends BroadcastReceiver {
             Toast.makeText(context, "用户解锁屏幕", Toast.LENGTH_SHORT).show();
         }
 
+        if(action.equals(Intent.ACTION_CALL)){
+            Toast.makeText(context, "用户正在拨打电话", Toast.LENGTH_SHORT).show();
+        }
+
 
     }
 }
