@@ -21,7 +21,10 @@ public class MyJobService extends JobService {
             Toast.makeText( getApplicationContext(),
                     "JobService task running", Toast.LENGTH_SHORT )
                     .show();
-            jobFinished( (JobParameters) msg.obj, false );
+            if(Build.VERSION.SDK_INT>=Build.VERSION_CODES.LOLLIPOP){
+                jobFinished( (JobParameters) msg.obj, false );
+                Toast.makeText(MyJobService.this, "finish job", Toast.LENGTH_SHORT).show();
+            }
             return true;
         }
 

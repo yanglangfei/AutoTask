@@ -8,7 +8,6 @@ import android.widget.Button;
 /**
  * Created by Administrator on 2016/11/22.
  */
-
 public class TestActivity extends Activity implements View.OnClickListener {
     private Button btnTest;
     @Override
